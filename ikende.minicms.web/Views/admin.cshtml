@@ -1,0 +1,142 @@
+﻿<html>
+<head>
+    <title></title>
+    <meta charset="utf8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <!-- Apple devices fullscreen -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <!-- Apple devices fullscreen -->
+    <meta names="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="/Theme/css/bootstrap.min.css">
+    <!-- Bootstrap responsive -->
+    <link rel="stylesheet" href="/Theme/css/bootstrap-responsive.min.css">
+    <!-- jQuery UI -->
+    <link rel="stylesheet" href="/Theme/css/plugins/jquery-ui/smoothness/jquery-ui.css">
+    <link rel="stylesheet" href="/Theme/css/plugins/jquery-ui/smoothness/jquery.ui.theme.css">
+    <!-- PageGuide -->
+    <link rel="stylesheet" href="/Theme/css/plugins/pageguide/pageguide.css">
+    <!-- Fullcalendar -->
+    <link rel="stylesheet" href="/Theme/css/plugins/fullcalendar/fullcalendar.css">
+    <link rel="stylesheet" href="/Theme/css/plugins/fullcalendar/fullcalendar.print.css" media="print">
+    <!-- Theme CSS -->
+    <link rel="stylesheet" href="/Theme/css/style.css">
+    <!-- Color CSS -->
+    <link rel="stylesheet" href="/Theme/css/themes.css">
+
+
+    <!-- jQuery -->
+    <script src="/Theme/js/jquery.min.js"></script>
+    <!-- Nice Scroll -->
+    <script src="/Theme/js/plugins/nicescroll/jquery.nicescroll.min.js"></script>
+    <!-- jQuery UI -->
+    <script src="/Theme/js/plugins/jquery-ui/jquery.ui.core.min.js"></script>
+    <script src="/Theme/js/plugins/jquery-ui/jquery.ui.widget.min.js"></script>
+    <script src="/Theme/js/plugins/jquery-ui/jquery.ui.mouse.min.js"></script>
+    <script src="/Theme/js/plugins/jquery-ui/jquery.ui.draggable.min.js"></script>
+    <script src="/Theme/js/plugins/jquery-ui/jquery.ui.resizable.min.js"></script>
+    <script src="/Theme/js/plugins/jquery-ui/jquery.ui.sortable.min.js"></script>
+    <!-- Touch enable for jquery UI -->
+    <script src="/Theme/js/plugins/touch-punch/jquery.touch-punch.min.js"></script>
+    <!-- slimScroll -->
+    <script src="/Theme/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="/Theme/js/bootstrap.min.js"></script>
+  
+    <!-- Bootbox -->
+    <script src="/Theme/js/plugins/bootbox/jquery.bootbox.js"></script>
+    <!-- Flot -->
+    <script src="/Theme/js/plugins/flot/jquery.flot.min.js"></script>
+    <script src="/Theme/js/plugins/flot/jquery.flot.bar.order.min.js"></script>
+    <script src="/Theme/js/plugins/flot/jquery.flot.pie.min.js"></script>
+    <script src="/Theme/js/plugins/flot/jquery.flot.resize.min.js"></script>
+    <!-- imagesLoaded -->
+    <script src="/Theme/js/plugins/imagesLoaded/jquery.imagesloaded.min.js"></script>
+    <!-- PageGuide -->
+    <script src="/Theme/js/plugins/pageguide/jquery.pageguide.js"></script>
+    <!-- FullCalendar -->
+    <script src="/Theme/js/plugins/fullcalendar/fullcalendar.min.js"></script>
+
+  
+    <!-- Theme scripts -->
+    <script src="/Theme/js/application.min.js"></script>
+ 
+
+    <!-- Apple devices Homescreen icon -->
+    <link rel="apple-touch-icon-precomposed" href="/Theme/img/apple-touch-icon-precomposed.png" />
+
+</head>
+
+<body>
+    <div id="main-panel">
+        <div id="navigation">
+            <div class="container-fluid" >
+                 <a href="#" id="brand">mini cms</a>
+                  <a href="#" class="toggle-nav" rel="tooltip" data-placement="bottom" title="Toggle navigation"><i class="icon-reorder"></i></a>
+                  <ul class='main-nav'>
+                      <li><span> </span></li>
+                @if (IsSectionDefined("mainmenu"))
+                {
+                    @RenderSection("mainmenu")
+                }
+                else
+                {
+
+                   
+
+                  
+
+                  
+                        <li id="menu-content">
+                            <a href="/block/index">
+                                <i class=" icon-eye-open"></i>
+                                <span>内容管理</span>
+                            </a>
+                        </li>
+                           <li id="menu-file" >
+                            <a href="/explorer/index">
+                                <i class="icon-file"></i>
+                                <span>文件管理</span>
+                            </a>
+                        </li>
+                                               <li id="menu-blog" >
+                            <a href="/blogadmin/index">
+                                <i class="icon-book"></i>
+                                <span>博客</span>
+                            </a>
+                        </li>
+                         <li id="menu-changepwd" >
+                            <a href="/admin/changepwd">
+                                <i class=" icon-key"></i>
+                                <span>修改密码</span>
+                            </a>
+                        </li>
+
+                     <li >
+                            <a href="/admin/signout">
+                                <i class="icon-off"></i>
+                                <span>退出</span>
+                            </a>
+                        </li>
+
+                    
+                }
+                      </ul>
+            </div>
+        </div>
+        <div class="container-fluid" id="content">
+            @RenderBody();
+       
+        </div>
+            <div >
+            <div class="container-fluid" >
+                版权所有(C) www.ikende.com  2014 
+               </div>
+        </div>
+    </div>
+</body>
+
+</html>
+

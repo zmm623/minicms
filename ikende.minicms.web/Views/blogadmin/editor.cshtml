@@ -1,0 +1,123 @@
+﻿@{
+    Layout = "~/Views/admin.cshtml";
+}
+@{
+    IList<string> cates = Model.SelectedCategories;
+    ikende.minicms.web.Service.Model.Blog blog = Model.Blog;
+    }
+<div id="left">
+    <div class="subnav">
+        <div class="subnav-title">
+            <a href="#" class='toggle-subnav'><i class="icon-angle-down"></i><span>功能列表</span></a>
+        </div>
+
+        <ul class="subnav-menu">
+            <li><a href="/blogadmin/index"><i class="icon-book"></i>博客</a> </li>
+            <li><a href="/blogadmin/editor"><i class="icon-edit"></i>添加博客</a> </li>
+            <li><a href="/blogadmin/category"><i class="icon-th-large"></i>分类</a> </li>
+            <li><a href="/blogadmin/signature"><i class="icon-bookmark-empty"></i>签名</a> </li>
+
+        </ul>
+    </div>
+</div>
+<div id="main">
+    <div class="container-fluid">
+        <div class="container-fluid">
+
+            <div class="row-fluid">
+                <div class="span12">
+                    <div class="box">
+                        <div class="box-title">
+                            <h3><i class="icon-reorder"></i>编辑</h3>
+                        </div>
+                        <div class="box-content">
+                            <form action="#" method="POST" class="form-horizontal">
+                                <input type="hidden" id="post-id" value="@Model.Blog.ID" />
+                                <div class="control-group">
+                                    <label for="textfield" class="control-label">标题:</label>
+                                    <div class="controls">
+                                        <input type="text" id="post-title" name="title"  value="@Model.Blog.Title" class="input-xlarge" style="width:90%">
+                                    </div>
+                                </div>
+                                 <div class="control-group">
+                                    <label for="textfield" class="control-label">关键词:</label>
+                                    <div class="controls">
+                                        <input type="text" id="post-keywords" name="title"  value="@Model.Blog.Keywords" class="input-xlarge" style="width:90%">
+                                    </div>
+                                </div>
+                                   <div class="control-group">
+                                    <label for="textfield" class="control-label">分类:</label>
+                                    <div class="controls">
+                                        @{
+                                            IList<string> selected = Model.SelectedCategories;
+                                            }
+                                        @foreach (ikende.minicms.web.Service.Model.BlogCategory cate in Model.Categories)
+                                        {
+                                            <input type="checkbox" name="cate" value="@cate.ID" @Html.Raw(selected.Contains(cate.ID)?"checked=true":"") /><span><b>@cate.Name</b></span>
+                                        }
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <textarea id="post-data" name="" style="width: 100%; height: 600px">@Model.Blog.Content</textarea>
+                                </div>
+                              
+                                <div class="form-actions">
+                                    <a class="btn" onclick="save(false)">保存</a>
+                                    <a class="btn" onclick="save(true)">保存并返回</a>
+                                </div>
+                            </form>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+    </div>
+</div>
+<script charset="utf-8" src="/kindeditor/kindeditor-min.js"></script>
+<script charset="utf-8" src="/kindeditor/lang/zh_CN.js"></script>
+<script>
+    $(document).ready(function () { $('#menu-blog').addClass("active"); });
+    KindEditor.ready(function (K) {
+        window.editor = K.create('#post-data', {
+            uploadJson: '/admin/upload_json',
+            fileManagerJson: '/admin/file_manager_json',
+            allowFileManager: true
+        });
+    });
+    function save(isreturn) {
+        var categories = new Array();
+        $('input[name="cate"]:checked').each(function () {
+            categories.push($(this).val());
+        });
+
+        var obj = { keywords: $('#post-keywords').val(), id: $('#post-id').val(), title: $('#post-title').val(), data: window.editor.html(), categories: categories.join(",") }
+        if (!obj.title) {
+            alert('请输入文章标题!');
+            return;
+        }
+        if (!obj.data) {
+            alert('请输入文章标题!');
+            return;
+        }
+        $.post("savepost", obj, function (result) {
+            if (!result && result != '') {
+
+                alert(result);
+            }
+            else {
+                if (isreturn)
+                    window.location.href = 'index';
+                else {
+                    $('#post-id').val(result);
+                    alert('保存成功')
+                }
+            }
+        });
+    }
+
+</script>

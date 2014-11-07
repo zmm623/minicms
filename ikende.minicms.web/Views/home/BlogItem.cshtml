@@ -1,0 +1,58 @@
+﻿@using ikende.minicms.web.Core
+@{
+    Layout = "~/views/blog/blogmaster.cshtml";
+}
+@section keywords{@Model.Blog.Keywords}
+
+ <div class="post">
+		
+		
+		<!-- Begin Info -->
+		<div class="info">
+		<!-- Begin Date -->
+		
+		<!-- End Date -->
+		
+		<!-- Begin Meta -->
+		<div class="meta">
+			<h3 class="blog-title"><a href="#">@Model.Blog.Title</a></h3>
+			
+			<div class="tags" style="padding-left:30px;padding-bottom:6px;">
+                
+                @foreach(ikende.minicms.web.Service.Model.BlogCategory cate in Model.Blog.Categories)
+                {
+                    <a href="/blog?category=@cate.ID"> <span class="label label-default">@cate.Name (@cate.Blogs)</span></a>
+                
+                }
+                <span class="label label-success">@Model.Blog.CreateTime</span>
+                @if (ikende.minicms.web.Core.Utils.Loginer != null)
+                {
+                    <a href="/blogadmin/editor?id=@Model.Blog.ID"> <span class="label label-default">编辑</span></a>
+                }
+			</div>
+		</div>
+		<!-- End Meta -->
+		</div>
+		<div class="clear"></div>
+		<!-- End Info -->
+	<div class="blog-summary">
+		@Html.Raw( Model.Blog.Content)
+		</div>
+		</div>
+      	<div class="clear"></div>
+<br />
+<br />
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">相关文章</h3>
+  </div>
+  <div class="panel-body">
+    <ul class="nav nav-pills">
+  @foreach (ikende.minicms.web.Service.Model.Blog blog in Model.Relation)
+  {
+      
+          <li><a href="/blog/@blog.ID"> @blog.Title </a></li>
+      }
+          </ul>
+  </div>
+</div>

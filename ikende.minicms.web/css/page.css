@@ -1,0 +1,24 @@
+﻿body {
+    font-size: 9pt;
+}
+#navbar-main1 {
+    color: #FFFFFF;
+    text-align: center;
+    padding-top: 20px;
+}
+    #navbar-main1 a {
+    color: #CCCCCC;
+}
+#container-left {
+    width: 780px;
+    float: left;
+    margin-top: 50px;
+    margin-bottom: 100px;
+}
+
+#container-right {
+    width: 300px;
+    float: right;
+ 
+    margin-top: 70px;
+}

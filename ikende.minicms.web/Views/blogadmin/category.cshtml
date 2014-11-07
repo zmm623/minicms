@@ -1,0 +1,104 @@
+﻿@{
+    Layout = "~/Views/admin.cshtml";
+}
+<div id="left">
+    <div class="subnav">
+        <div class="subnav-title">
+            <a href="#" class='toggle-subnav'><i class="icon-angle-down"></i><span>功能列表</span></a>
+        </div>
+
+        <ul class="subnav-menu">
+            <li><a href="/blogadmin/index"><i class="icon-book"></i>博客</a> </li>
+            <li><a href="/blogadmin/editor"><i class="icon-edit"></i>添加博客</a> </li>
+            <li><a href="/blogadmin/category"><i class="icon-th-large"></i>分类</a> </li>
+            <li><a href="/blogadmin/signature"><i class="icon-bookmark-empty"></i>签名</a> </li>
+            
+        </ul>
+    </div>
+</div>
+<div id="main">
+    <div class="container-fluid">
+        <div class="container-fluid">
+
+            <div class="row-fluid">
+                <div class="span12">
+                    <div class="box">
+                        <div class="box-title">
+                            <h3><i class="icon-reorder"></i>分类</h3>
+                        </div>
+                        <div class="box-content">
+                            <div class="control-group">
+                                  <input type="text" id="category-title" name="title"  value="" class="input-xlarge" style="margin-top:10px">  <button class="btn" onclick="addcategory()"><i class="icon-edit"></i>添加</button>
+                                </div>
+
+                             <table class="table table-hover table-nomargin">
+                                <thead>
+                                    <tr>
+                                     
+                                        <th  style="width:350px">名称</th>
+                                     
+                                        <th >操作</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                  @foreach(ikende.minicms.web.Service.Model.BlogCategory item in Model)
+                                  {
+                                        <tr>
+                                          
+                                          <td >@item.Name</td>
+                                           
+                                            <td  style="text-align: right"><button class="btn" onclick="delcategory('@item.ID')" ><i class="icon-trash"></i>删除</button></td>
+
+                                        </tr>
+                                  }
+                                   
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () { $('#menu-blog').addClass("active"); });
+
+    function addcategory() {
+        var obj = { title: $('#category-title').val()}
+        if (!obj.title) {
+            alert('输入分类名称!');
+            return;
+        }
+      
+        $.post("addcategory", obj, function (result) {
+
+            if (!result && result != '') {
+
+                alert(result);
+            }
+            else {
+                window.location.reload();
+            }
+        });
+    }
+    function delcategory(id) {
+        if (!confirm('是否要删除分类?'))
+            return;
+        $.post("delcategory", {id:id}, function (result) {
+
+            if (!result && result != '') {
+
+                alert(result);
+            }
+            else {
+                window.location.reload();
+            }
+        });
+    }
+</script>

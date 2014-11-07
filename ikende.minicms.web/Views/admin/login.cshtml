@@ -1,0 +1,65 @@
+﻿@{
+    Layout = null;
+    }
+
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+	<!-- Apple devices fullscreen -->
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<!-- Apple devices fullscreen -->
+	<meta names="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+	
+
+	<!-- Bootstrap -->
+	<link rel="stylesheet" href="/Theme/css/bootstrap.min.css">
+	<!-- Bootstrap responsive -->
+	<link rel="stylesheet" href="/Theme/css/bootstrap-responsive.min.css">
+	<!-- Theme CSS -->
+	<link rel="stylesheet" href="/Theme/css/style.css">
+	<!-- Color CSS -->
+	<link rel="stylesheet" href="/Theme/css/themes.css">
+
+
+	<!-- jQuery -->
+	<script src="/Theme/js/jquery.min.js"></script>
+	<!-- Nice Scroll -->
+	<script src="/Theme/js/plugins/nicescroll/jquery.nicescroll.min.js"></script>
+	<!-- Bootstrap -->
+	<script src="/Theme/js/bootstrap.min.js"></script>
+	<script src="/Theme/js/eakroko.js"></script>
+
+	<!-- Favicon -->
+	<link rel="shortcut icon" href="/img/favicon.ico" />
+	<!-- Apple devices Homescreen icon -->
+	<link rel="apple-touch-icon-precomposed" href="/Theme/img/apple-touch-icon-precomposed.png" />
+
+</head>
+
+<body class='login'>
+	<div class="wrapper">
+		<h1><a href="index.html"><img src="/Theme/img/logo-big.png" alt="" class='retina-ready' width="59" height="49">mini cms</a></h1>
+		<div class="login-body">
+			<h2>SIGN IN</h2>
+			<form action="login" method='post'>
+				<div class="email">
+					<input type="text" name='name' placeholder="User name" value="admin" class='input-block-level'>
+				</div>
+				<div class="pw">
+					<input type="password" name="pwd" placeholder="Password" value="admin" class='input-block-level'>
+				</div>
+				<div class="submit">
+					<input type="submit" value="登陆" class='btn btn-primary'>
+				</div>
+			</form>
+			<div class="forget">
+				<a href="#"><span>@Model</span></a>
+			</div>
+		</div>
+	</div>
+	
+</body>
+
+</html>

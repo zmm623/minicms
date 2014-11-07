@@ -1,0 +1,15 @@
+a:hover {
+}
+.blog-summary {
+    line-height: 23px;
+}
+.blog-title a {
+    border-left-style: outset;
+    border-left-width: 6px;
+    border-left-color: #5bc0de;
+    padding-left: 10px;
+}
+    .blog-title a:hover {
+    text-decoration: none;
+    
+}

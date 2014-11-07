@@ -1,0 +1,58 @@
+﻿<table class="table table-hover table-nomargin">
+    <thead>
+        <tr>
+            <th>
+                <input id="checkall" type="checkbox" /></th>
+            <th>标题</th>
+            <th>创建时间</th>
+            <th class="hidden-350">大小</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (ikende.minicms.web.Models.File file in Model.Files)
+        {
+            <tr>
+                <td>
+                    <input name="selectbox" value="@file.Path" type="checkbox" />
+
+                </td>
+                @if (Model.IsEdit)
+                {
+                    <td><a href="editor?file=@ikende.minicms.web.Core.Utils.GetFileName(file.Path)">@file.Name</a></td>
+                }
+                else
+                {
+                    <td>@file.Name</td>
+                }
+                <td>@file.CreateTime
+
+                </td>
+                <td class="hidden-350" style="text-align: right">@file.Size</td>
+
+            </tr>
+									
+        }
+    </tbody>
+</table>
+<script>
+    $(function () {
+
+
+        $("#checkall").click(
+        function () {
+            if (this.checked) {
+                $("input[name='selectbox']").each(function () { this.checked = true; });
+            } else {
+                $("input[name='selectbox']").each(function () { this.checked = false; });
+            }
+        }
+        );
+
+    });
+    function GetSelected() {
+        var result = new Array();
+        $("input[name='selectbox']").each(function () { if (this.checked) { result.push($(this).val())} });
+        return result;
+    }
+</script>

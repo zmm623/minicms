@@ -1,0 +1,102 @@
+﻿@model ikende.minicms.web.Service.Model.TextBlock
+@{
+    Layout = "~/Views/admin.cshtml";
+}
+
+<div id="left">
+
+
+    <div class="subnav">
+        <div class="subnav-title">
+            <a href="#" class='toggle-subnav'><i class="icon-angle-down"></i><span>功能</span></a>
+        </div>
+        <ul class="subnav-menu">
+            <li>
+                <a href="/block/index"><i class="icon-list-alt"></i>内容</a>
+            </li>
+           
+            <li>
+                <a href="/block/editor"><i class="icon-edit"></i>添加内容</a>
+            </li>
+
+        </ul>
+    </div>
+
+</div>
+<div id="main">
+    <div class="container-fluid">
+     <div class="row-fluid">
+					<div class="span12">
+						<div class="box">
+							<div class="box-title">
+								<h3><i class="icon-edit"></i> 编辑内容</h3>
+							</div>
+							<div class="box-content">
+								<form action="#" method="POST" class="form-horizontal">
+                                    <input type="hidden" id="block-id" value="@Model.ID" />
+									<div class="control-group">
+										<label for="textfield" class="control-label">标题</label>
+										<div class="controls">
+											<input type="text" name="title" id="block-title" value="@Model.Title" class="input-xlarge">
+											
+										</div>
+									</div>
+									<div class="control-group">
+										 <textarea id="cate-data" name="" style="width: 100%; height: 600px">@Model.Content</textarea>
+									</div>
+									
+									<div class="form-actions">
+										<a  class="btn" onclick="save(false)">保存</a>
+										<a  class="btn" onclick="save(true)">保存并返回</a>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>   
+       
+    </div>
+</div>
+<script charset="utf-8" src="/kindeditor/kindeditor-min.js"></script>
+<script charset="utf-8" src="/kindeditor/lang/zh_CN.js"></script>
+<script>
+    KindEditor.ready(function (K) {
+        window.editor = K.create('#cate-data', {
+            uploadJson: '/admin/upload_json',
+            fileManagerJson: '/admin/file_manager_json',
+            allowFileManager: true
+        });
+    });
+
+    function save(isreturn) {
+        var obj = { id: $('#block-id').val(), title: $('#block-title').val(), data: window.editor.html() }
+        if (!obj.title) {
+            alert('输入内容标题!');
+            return;
+        }
+        if (!obj.data) {
+            alert('请输入内容信息!');
+            return;
+        }
+        $.post("save", obj, function (result) {
+
+            if (!result && result != '') {
+
+                alert(result);
+            }
+            else {
+                if (isreturn)
+                    window.location.href = 'index';
+                else {
+                    $('#block-id').val(result);
+                    alert('保存成功');
+                }
+            }
+        });
+    }
+</script>
+<script>
+    $(document).ready(function () { $('#menu-content').addClass("active"); });
+
+
+</script>

@@ -1,0 +1,53 @@
+﻿@using ikende.minicms.web.Core
+@{
+    Layout = "~/views/blog/blogmaster.cshtml";
+}
+  @foreach (ikende.minicms.web.Service.Model.Blog blog in Model.Blogs)
+  {
+    <div class="post">
+		
+		
+		<!-- Begin Info -->
+		<div class="info">
+		<!-- Begin Date -->
+		<div class="date">
+			<div class="day">@blog.CreateTime.Day</div>
+			<div class="month">@blog.CreateTime.Month 月</div>
+		</div>
+		<!-- End Date -->
+		
+		<!-- Begin Meta -->
+		<div class="meta">
+			<h3 class="title"><a href="post.html">@blog.Title</a></h3>
+			
+			<div class="tags">
+                
+                @foreach(ikende.minicms.web.Service.Model.BlogCategory cate in blog.Categories)
+                {
+                    <a href="index?category=@cate.ID">@cate.Name (@cate.Blogs)</a>
+                
+                }
+
+			</div>
+		</div>
+		<!-- End Meta -->
+		</div>
+		<div class="clear"></div>
+		<!-- End Info -->
+	
+		@blog.Summary ...
+		
+		</div>
+      	<div class="clear"></div>
+  }
+	
+		
+		
+	
+		
+	
+	
+		<!-- End Info -->
+		
+		
+		  @RenderPage("~/Views/controls/pagebar.cshtml")

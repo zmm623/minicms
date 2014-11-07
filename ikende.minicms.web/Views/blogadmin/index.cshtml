@@ -1,0 +1,103 @@
+﻿@{
+    Layout = "~/Views/admin.cshtml";
+}
+<div id="left">
+     <div class="subnav">
+        <div class="subnav-title">
+            <a href="#" class='toggle-subnav'><i class="icon-angle-down"></i><span>功能列表</span></a>
+        </div>
+
+        <ul class="subnav-menu">
+           
+            <li><a href="/blogadmin/editor"><i class="icon-edit"></i>添加博客</a> </li>
+            <li><a href="/blogadmin/category"><i class="icon-th-large"></i>分类</a> </li>
+            <li><a href="/blogadmin/signature"><i class="icon-bookmark-empty"></i>签名</a> </li>
+
+        </ul>
+    </div>
+    <div class="subnav">
+        <div class="subnav-title">
+            <a href="#" class='toggle-subnav'><i class="icon-angle-down"></i><span>博客分类</span></a>
+        </div>
+
+        <ul class="subnav-menu">
+
+            @foreach (ikende.minicms.web.Service.Model.BlogCategory cate in Model.Categories)
+            {
+                <li><a href="index?category=@cate.ID"><i class="icon-th-large"></i>@cate.Name (@cate.Blogs)</a></li>
+            }
+
+
+        </ul>
+    </div>
+   
+</div>
+<div id="main">
+    <div class="container-fluid">
+        <div class="container-fluid">
+
+            <div class="row-fluid">
+                <div class="span12">
+                    <div class="box">
+                        <div class="box-title">
+                            <h3><i class="icon-reorder"></i>博客</h3>
+                        </div>
+                        <div class="box-content">
+
+
+                            <table class="table table-hover table-nomargin">
+                                <thead>
+                                    <tr>
+
+                                        <th style="width: 350px">标题</th>
+                                        <th>创建时间</th>
+                                        <th>操作</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach(ikende.minicms.web.Service.Model.Blog blog in Model.Blogs)
+                                    {
+                                    <tr>
+
+                                        <td><a href="editor?id=@blog.ID"> @blog.Title</a></td>
+                                        <td>@blog.CreateTime</td>
+                                        <td style="text-align: right">
+                                            <button class="btn" onclick="delpost('@blog.ID') "><i class="icon-trash"></i>删除</button></td>
+
+                                    </tr>
+
+                                    }
+                                </tbody>
+                            </table>
+                            @RenderPage("~/Views/controls/pagebar.cshtml")
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+    </div>
+</div>
+<script>
+    function delpost(id) {
+        if (confirm('是否要删除文章?')) {
+            $.post("Delete", { blog: id }, function (result) {
+                if (!result && result != '') {
+                    alert(result);
+                }
+                else {
+                    window.location.reload();
+                }
+            });
+        }
+    }
+
+</script>
+<script>
+    $(document).ready(function () { $('#menu-blog').addClass("active"); });
+
+
+</script>
